@@ -1,0 +1,113 @@
+﻿using UnityEngine;
+using System.Collections;
+using System;
+
+namespace Vector3DNamespace
+{
+
+    public class Vector3D : Component {
+
+        public float x;
+        public float y;
+        public float z;
+
+        private float magnitude;
+
+        public Vector3D()
+        {
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+
+            return;
+        }
+
+        public Vector3D(float xi, float yi, float zi)
+        {
+            this.x = xi;
+            this.y = yi;
+            this.z = zi;
+        }
+
+        public void Set(float xi, float yi, float zi)
+        {
+            this.x = xi;
+            this.y = yi;
+            this.z = zi;
+        }
+
+        public float Magnitude
+        {
+            get
+            {
+                this.magnitude = Mathf.Sqrt(x * x + y * y + z * z);
+                return this.magnitude;
+            }
+        }
+
+        public void Normalize()
+        {
+            this.x /= Magnitude;
+            this.y /= Magnitude;
+            this.z /= Magnitude;
+
+            return;
+        }
+
+        public void Reverse()
+        {
+            this.x *= -1;
+            this.y *= -1;
+            this.z *= -1;
+
+            return;
+        }
+
+        public void Scale(Vector3D vs)
+        {
+            this.x *= vs.x;
+            this.y *= vs.y;
+            this.z *= vs.z;
+
+            return;
+        }
+
+        public void Scale(float s)
+        {
+            this.x *= s;
+            this.y *= s;
+            this.z *= s;
+
+            return;
+        }
+
+        public static Vector3D operator+(Vector3D v1, Vector3D v2)
+
+        {
+
+            return new Vector3D(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+        }
+
+        public static Vector3D operator-(Vector3D v1, Vector3D v2)
+
+        {
+
+            return new Vector3D(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+        }
+
+        public static Vector3D operator*(Vector3D v1, float s)
+
+        {
+
+            return new Vector3D(v1.x * s, v1.y * s, v1.z * s);
+        }
+
+        public static Vector3D Scale(Vector3D v1, Vector3D v2)
+        {
+
+            return new Vector3D(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+        }
+        
+    }
+
+}
