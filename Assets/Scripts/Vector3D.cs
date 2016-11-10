@@ -102,6 +102,13 @@ namespace Vector3DNamespace
             return new Vector3D(v1.x * s, v1.y * s, v1.z * s);
         }
 
+        public static Vector3D operator/(Vector3D a, float d)
+
+        {
+
+            return new Vector3D(a.x / d, a.y / d, a.z / d);
+        }
+
         public static Vector3D Scale(Vector3D v1, Vector3D v2)
         {
 
