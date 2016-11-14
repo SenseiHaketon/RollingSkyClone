@@ -18,21 +18,23 @@ public class PlayerMovement : MonoBehaviour {
     void Update () {
 
 
-        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 10));
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        //{
+        //    Vector3D temp = new Vector3D(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 10);
+        //    Vector3D touchPosition = Camera.main.ScreenToWorldPoint(temp);
 
-            Vector3 target = transform.position;
-            target.z = touchPosition.z;
-            transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
-        }
-        else if(Input.GetKey("a"))
+        //    Vector3 target = transform.position;
+        //    target.z = touchPosition.z;
+        //    transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+        //}
+        //else 
+        if (Input.GetKey("a"))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - speedKeyboard * Time.deltaTime);
+            transform.position = new Vector3D(transform.position.x, transform.position.y, transform.position.z - speedKeyboard * Time.deltaTime);
         }
         else if (Input.GetKey("d"))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speedKeyboard * Time.deltaTime);
+            transform.position = new Vector3D(transform.position.x, transform.position.y, transform.position.z + speedKeyboard * Time.deltaTime);
         }
     }
 }

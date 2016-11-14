@@ -4,23 +4,23 @@ using System;
 
 namespace Vector3DNamespace
 {
-
-    public class Vector3D : Component {
+    [Serializable]
+    public struct Vector3D {
 
         public float x;
         public float y;
         public float z;
 
-        private float magnitude;
+        //private float magnitude;
 
-        public Vector3D()
-        {
-            this.x = 0;
-            this.y = 0;
-            this.z = 0;
+        //public Vector3D()
+        //{
+        //    this.x = 0;
+        //    this.y = 0;
+        //    this.z = 0;
 
-            return;
-        }
+        //    return;
+        //}
 
         public Vector3D(float xi, float yi, float zi)
         {
@@ -36,23 +36,28 @@ namespace Vector3DNamespace
             this.z = zi;
         }
 
-        public float Magnitude
+        public static implicit operator Vector3(Vector3D v)
         {
-            get
-            {
-                this.magnitude = Mathf.Sqrt(x * x + y * y + z * z);
-                return this.magnitude;
-            }
+            return new Vector3(v.x, v.y, v.z);
         }
 
-        public void Normalize()
-        {
-            this.x /= Magnitude;
-            this.y /= Magnitude;
-            this.z /= Magnitude;
+        //public float Magnitude
+        //{
+        //    get
+        //    {
+        //        this.magnitude = Mathf.Sqrt(x * x + y * y + z * z);
+        //        return this.magnitude;
+        //    }
+        //}
 
-            return;
-        }
+        //public void Normalize()
+        //{
+        //    this.x /= Magnitude;
+        //    this.y /= Magnitude;
+        //    this.z /= Magnitude;
+
+        //    return;
+        //}
 
         public void Reverse()
         {
@@ -114,7 +119,16 @@ namespace Vector3DNamespace
 
             return new Vector3D(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
         }
-        
+
+        public static Vector3D Lerp(Vector3D v1, Vector3D v2, float t)
+
+        {
+
+            t = Mathf.Clamp01(t);
+
+            return new Vector3D(v1.x + (v2.x - v1.x) * t, v1.y + (v2.y - v1.y) * t, v1.z + (v2.z - v1.z) * t);
+        }
+
     }
 
 }
