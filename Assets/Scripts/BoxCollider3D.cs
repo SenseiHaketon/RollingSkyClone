@@ -12,7 +12,7 @@ namespace BoxCollider3Dn
         private Vector3D center;
         private Vector3D outer;
 
-        
+
 
         public Vector3D Center
         {
@@ -75,10 +75,29 @@ namespace BoxCollider3Dn
             this.outer = vOuter;
         }
 
-        public void GetPoints()
+        //public Vector3D[] GetPoints()
+        //{
+        //    Vector3D[] points = new Vector3D[8];
+        //    points[0] = center + new Vector3D(outer.x, outer.y, outer.z);
+        //    points[1] = center + new Vector3D(outer.x, outer.y, -outer.z);
+        //    points[2] = center + new Vector3D(outer.x, -outer.y, outer.z);
+        //    points[3] = center + new Vector3D(outer.x, -outer.y, -outer.z);
+        //    points[4] = center + new Vector3D(-outer.x, outer.y, outer.z);
+        //    points[5] = center + new Vector3D(-outer.x, outer.y, -outer.z);
+        //    points[6] = center + new Vector3D(-outer.x, -outer.y, outer.z);
+        //    points[7] = center + new Vector3D(-outer.x, -outer.y, -outer.z);
+
+        //    return points;
+        //}
+
+        public bool AABBtoAABB(BoxCollider3D b)
         {
-            Vector3D[] points = new Vector3D[8];
-            points[0] = center + new Vector3D(outer.x, outer.y, outer.z);
+            if (this.Max.x > b.Min.x && this.Min.x < b.Max.x &&
+                this.Max.y > b.Min.y && this.Min.y < b.Max.y &&
+                this.Max.z > b.Min.z && this.Min.z < b.Max.z)
+                 return true;
+            else
+                return false;
         }
        
     }
