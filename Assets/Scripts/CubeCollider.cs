@@ -6,11 +6,11 @@ using Vector3DNamespace;
 
 public class CubeCollider : MonoBehaviour {
 
-    private BoxCollider3D myCollider;
+    public BoxCollider3D myCollider;
     private Renderer myRenderer;
     private Vector3D myCenter;
     private Vector3D myExtents;
-    private CubeCollider[] otherObjects;
+    public CubeCollider[] otherObjects;
 
 
     // Use this for initialization
@@ -29,22 +29,41 @@ public class CubeCollider : MonoBehaviour {
 
         foreach (CubeCollider otherObject in otherObjects)
         {
-            if (this.tag == "Player" && otherObject.tag != "Player")
+            if (this.tag == "Player" && otherObject.tag != "Player" && otherObject.tag != "Ground")
             {
                 if (this.myCollider.AABBtoAABB(otherObject.myCollider) == true)
                 {
                     GetComponent<Renderer>().material.color = new Color(255, 0, 0);
                 }
             }
-        }
-
-              
+        }              
 	}
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(myCollider.Center, myCollider.Outer * 2);
+    }
+
+    public bool CheckGround()
+    {
+        bool temp = false;
+        foreach(CubeCollider otherObject in otherObjects)
+        {
+            if (otherObject.tag == "Ground")
+            {
+                if (this.myCollider.AABBtoAABB(otherObject.myCollider) == true)
+                {
+                    temp = true;
+                    return temp;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
 }
