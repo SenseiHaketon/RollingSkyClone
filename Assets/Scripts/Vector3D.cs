@@ -11,16 +11,6 @@ namespace Vector3DNamespace
         public float y;
         public float z;
 
-        //private float magnitude;
-
-        //public Vector3D()
-        //{
-        //    this.x = 0;
-        //    this.y = 0;
-        //    this.z = 0;
-
-        //    return;
-        //}
 
         public Vector3D(float xi, float yi, float zi)
         {

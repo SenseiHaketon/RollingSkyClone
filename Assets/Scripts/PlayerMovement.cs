@@ -75,12 +75,6 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    IEnumerator Jump()
-    {
-        yield return new WaitForSeconds(0.2f);
-        inAir = true;
-    }
-
     IEnumerator Hop(float time)
     {
         if (inAir) yield break;
