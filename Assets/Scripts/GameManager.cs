@@ -3,11 +3,11 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    public float levelSpeed = 1f; 
-    
+    public float levelSpeed = -5f;
+    public float counter = 5f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	    
 
 	}

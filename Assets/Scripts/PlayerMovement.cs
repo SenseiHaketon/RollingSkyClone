@@ -8,19 +8,22 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 0.1f;
     public float speedKeyboard = 0.1f;
     public float jumpSpeed = 1.0f;
-    private float fallingSpeed = 15f;
     public float fallingSpeedCtrl = 15f;
     public float hopHeight = 5f;
 
-    private bool inAir;
+    private float fallingSpeed = 15f;
+    private GameManager gameManager;
+    public bool inAir;
     private CubeCollider myCubeCollider;
+    public bool goJump = false;
 
 
     // Use this for initialization
     void Start () {
         inAir = true;
         myCubeCollider = this.GetComponent<CubeCollider>();
-        
+        gameManager = FindObjectOfType<GameManager>();
+        goJump = false;
     }
 
     // Update is called once per frameCamera.main.ScreenToWorldPoint(temp)
@@ -37,21 +40,33 @@ public class PlayerMovement : MonoBehaviour {
         //    transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
         //}
         //else 
-        if (Input.GetKey("a"))
+
+
+
+        if (gameManager.counter <= 0)
         {
-            transform.position = new Vector3D(transform.position.x, transform.position.y, transform.position.z - speedKeyboard * Time.deltaTime);
-        }
-        else if (Input.GetKey("d"))
-        {
-            transform.position = new Vector3D(transform.position.x, transform.position.y, transform.position.z + speedKeyboard * Time.deltaTime);
+            if (Input.GetKey("a"))
+            {
+                transform.position = new Vector3D(transform.position.x - speedKeyboard * Time.deltaTime, transform.position.y, transform.position.z);
+            }
+            else if (Input.GetKey("d"))
+            {
+                transform.position = new Vector3D(transform.position.x + speedKeyboard * Time.deltaTime, transform.position.y, transform.position.z);
+            }
+
+            //if (Input.GetKey(KeyCode.Space) && inAir == false)
+            //{
+            //    StartCoroutine(Hop(0.75f));
+            //} 
         }
 
-        if(Input.GetKey(KeyCode.Space) && inAir == false)
+        if (goJump)
         {
             StartCoroutine(Hop(0.75f));
+            goJump = false;
         }
 
-        if(myCubeCollider.CheckGround())
+        if (myCubeCollider.CheckGround())
         {
             inAir = false;
         }

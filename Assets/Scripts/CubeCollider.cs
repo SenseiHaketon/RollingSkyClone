@@ -29,7 +29,7 @@ public class CubeCollider : MonoBehaviour {
 
         foreach (CubeCollider otherObject in otherObjects)
         {
-            if (this.tag == "Player" && otherObject.tag != "Player" && otherObject.tag != "Ground")
+            if (this.tag == "Player" && otherObject.tag == "Collision")//!= "Player" && otherObject.tag != "Ground" && otherObject.tag != "Trigger")
             {
                 if (this.myCollider.AABBtoAABB(otherObject.myCollider) == true)
                 {
@@ -50,18 +50,18 @@ public class CubeCollider : MonoBehaviour {
         bool temp = false;
         foreach(CubeCollider otherObject in otherObjects)
         {
-            if (otherObject.tag == "Ground")
-            {
-                if (this.myCollider.AABBtoAABB(otherObject.myCollider) == true)
+            //if (otherObject.tag == "Ground")
+            //{
+                if (this.myCollider.AABBtoAABB(otherObject.myCollider) == true && otherObject.tag == "Ground")
                 {
                     temp = true;
                     return temp;
                 }
                 else
                 {
-                    return false;
+                    continue;
                 }
-            }
+            //}
         }
         return false;
     }
