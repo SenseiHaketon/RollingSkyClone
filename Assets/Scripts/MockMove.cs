@@ -15,7 +15,7 @@ public class MockMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         if (gM.counter <= 0)
         {

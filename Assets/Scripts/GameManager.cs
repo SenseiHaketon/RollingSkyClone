@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -26,5 +27,10 @@ public class GameManager : MonoBehaviour {
             if (otherObject.transform.position.z <= player.transform.position.z - 10)
                 Destroy(otherObject.gameObject);
         }
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOverMenu");
     }
 }

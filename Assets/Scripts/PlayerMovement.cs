@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if (this.myCubeCollider.myCollider.AABBtoAABB(otherObject.myCollider) == true)
                 {
-                    GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+                    gameManager.GameOver();
                 }
             }
         }
