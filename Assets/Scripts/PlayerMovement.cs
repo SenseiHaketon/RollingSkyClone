@@ -4,19 +4,20 @@ using Vector3DNamespace;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float spaceToCam = 5f;
     public float speed = 0.1f;
     public float speedKeyboard = 0.1f;
-    public float jumpSpeed = 1.0f;
     public float fallingSpeedCtrl = 15f;
     public float hopHeight = 5f;
+    public bool inAir;
+    public bool goJump = false;
 
     private float fallingSpeed = 15f;
     private GameManager gameManager;
-    public bool inAir;
     private CubeCollider myCubeCollider;
-    public bool goJump = false;
+    private Vector3D myPos;
 
+    public MockMove mockObject;
+    private Vector3D mockPos;
 
     // Use this for initialization
     void Start () {
@@ -24,25 +25,18 @@ public class PlayerMovement : MonoBehaviour {
         myCubeCollider = this.GetComponent<CubeCollider>();
         gameManager = FindObjectOfType<GameManager>();
         goJump = false;
+        myPos = new Vector3D(transform.position.x, transform.position.y, transform.position.z);
     }
 
-    // Update is called once per frameCamera.main.ScreenToWorldPoint(temp)
+    // Update is called once per frame
     void Update () {
 
+        // Follow mockobject controlled by touch
+        myPos = new Vector3D(transform.position.x, transform.position.y, transform.position.z);
+        mockPos = new Vector3D(mockObject.transform.position.x, transform.position.y, transform.position.z);
+        transform.position = Vector3D.Lerp(myPos, mockPos, speed);
 
-        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        //{
-        //    Vector3D temp = new Vector3D(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 10);
-        //    Vector3D touchPosition = Camera.main.ScreenToWorldPoint(temp);
-
-        //    Vector3 target = transform.position;
-        //    target.z = touchPosition.z;
-        //    transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
-        //}
-        //else 
-
-
-
+        // Keyboard input
         if (gameManager.counter <= 0)
         {
             if (Input.GetKey("a"))
@@ -57,15 +51,29 @@ public class PlayerMovement : MonoBehaviour {
             //if (Input.GetKey(KeyCode.Space) && inAir == false)
             //{
             //    StartCoroutine(Hop(0.75f));
-            //} 
+            //}
         }
 
+        // Check collision with "hostile" objects
+        foreach (CubeCollider otherObject in gameManager.otherObjects)
+        {
+            if (otherObject.tag == "Collision")
+            {
+                if (this.myCubeCollider.myCollider.AABBtoAABB(otherObject.myCollider) == true)
+                {
+                    GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+                }
+            }
+        }
+        
+        // If collision with JumpTile
         if (goJump)
         {
             StartCoroutine(Hop(0.75f));
             goJump = false;
         }
 
+        // Check collision with ground
         if (myCubeCollider.CheckGround())
         {
             inAir = false;
@@ -83,13 +91,13 @@ public class PlayerMovement : MonoBehaviour {
         {
             fallingSpeed = 0f;
         }
-
-        if (inAir == true)
+        else if (inAir == true)
         {
             fallingSpeed = fallingSpeedCtrl;
         }
     }
 
+    // Jump 
     IEnumerator Hop(float time)
     {
         if (inAir) yield break;
@@ -109,7 +117,4 @@ public class PlayerMovement : MonoBehaviour {
         }
         inAir = false;
     }
-
-
-
 }
