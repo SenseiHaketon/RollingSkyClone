@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour {
     public float hopHeight = 5f;
     public bool inAir;
     public bool goJump = false;
+    private float shieldTimer = 0f;
+    public float shieldTimerCtrl = 5f;
 
     private float fallingSpeed = 15f;
     private GameManager gameManager;
@@ -19,6 +21,10 @@ public class PlayerMovement : MonoBehaviour {
     public MockMove mockObject;
     private Vector3D mockPos;
 
+    public AudioSource audioSrc;
+    public AudioClip clip;
+    private bool sfxPlayed;
+
     // Use this for initialization
     void Start () {
         inAir = true;
@@ -26,15 +32,19 @@ public class PlayerMovement : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
         goJump = false;
         myPos = new Vector3D(transform.position.x, transform.position.y, transform.position.z);
+        sfxPlayed = false;
     }
 
     // Update is called once per frame
     void Update () {
 
         // Follow mockobject controlled by touch
-        myPos = new Vector3D(transform.position.x, transform.position.y, transform.position.z);
-        mockPos = new Vector3D(mockObject.transform.position.x, transform.position.y, transform.position.z);
-        transform.position = Vector3D.Lerp(myPos, mockPos, speed);
+        if (Input.touchCount > 0)
+        {
+            myPos = new Vector3D(transform.position.x, transform.position.y, transform.position.z);
+            mockPos = new Vector3D(mockObject.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3D.Lerp(myPos, mockPos, speed);
+        }
 
         // Keyboard input
         if (gameManager.counter <= 0)
@@ -55,16 +65,35 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Check collision with "hostile" objects
-        foreach (CubeCollider otherObject in gameManager.otherObjects)
+        gameManager.UpdateOtherObjects();
+
+        if (shieldTimer <= 0f)
         {
-            if (otherObject.tag == "Collision")
+            sfxPlayed = false;
+            foreach (CubeCollider otherObject in gameManager.otherObjects)
             {
-                if (this.myCubeCollider.myCollider.AABBtoAABB(otherObject.myCollider) == true)
+                if (otherObject != null)
                 {
-                    gameManager.GameOver();
+                    if (otherObject.tag == "Collision")
+                    {
+                        if (this.myCubeCollider.myCollider.AABBtoAABB(otherObject.myCollider) == true)
+                        {
+                            if (gameManager.activePU != "shield")
+                                gameManager.GameOver();
+                            else
+                            {
+                                if (!sfxPlayed)
+                                    PlayClip();
+                                gameManager.activePU = "null";
+                                shieldTimer = shieldTimerCtrl;
+                            }
+                        }
+                    }
                 }
             }
         }
+        else
+            shieldTimer -= Time.deltaTime;
         
         // If collision with JumpTile
         if (goJump)
@@ -116,5 +145,12 @@ public class PlayerMovement : MonoBehaviour {
             yield return null;
         }
         inAir = false;
+    }
+
+    void PlayClip()
+    {
+        audioSrc.clip = clip;
+        audioSrc.Play();
+        sfxPlayed = true;
     }
 }
