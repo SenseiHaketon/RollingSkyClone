@@ -89,12 +89,16 @@ public class PlayerMovement : MonoBehaviour {
                             }
                         }
                     }
+
                 }
             }
         }
         else
             shieldTimer -= Time.deltaTime;
-        
+
+        if (this.transform.position.y <= -3)
+            gameManager.GameOver();
+
         // If collision with JumpTile
         if (goJump)
         {

@@ -11,6 +11,8 @@ public class ShieldPU : MonoBehaviour {
     public AudioSource audioSrc;
     public AudioClip clip;
 
+    private int points = 100;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +31,7 @@ public class ShieldPU : MonoBehaviour {
         {
             if (!sfxPlayed)
             {
+                gM.Score += points;
                 PlayClip();
                 gM.activePU = "shield";
                 this.gameObject.SetActive(false);
