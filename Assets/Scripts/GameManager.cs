@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     private int score;
     private int highScore;
     private float slowTimer = 5f;
+    public int lvlWon;
 
     public int Score
     {
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         otherObjects = FindObjectsOfType<CubeCollider>();
         activePU = "null";
+        lvlWon = 0;
 
         if (PlayerPrefs.HasKey("Score") && SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -50,6 +52,11 @@ public class GameManager : MonoBehaviour {
         if(PlayerPrefs.HasKey("HighScore"))
         {
             highScore = PlayerPrefs.GetInt("HighScore");
+        }
+
+        if(PlayerPrefs.HasKey("Won") && SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            lvlWon = PlayerPrefs.GetInt("Won");
         }
 
         if(highScoreText != null)
@@ -68,7 +75,7 @@ public class GameManager : MonoBehaviour {
                 if (otherObject.transform.position.z <= player.transform.position.z - 10)
                 {
                     Destroy(otherObject.gameObject);
-                    UpdateOtherObjects();
+                    //UpdateOtherObjects();
                 }
             }
         }
@@ -117,5 +124,6 @@ public class GameManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetInt("HighScore", highScore);
+        PlayerPrefs.SetInt("Won", lvlWon);
     }
 }

@@ -19,5 +19,12 @@ public class LevelMovement : MonoBehaviour {
             this.transform.position = new Vector3D(this.transform.position.x, this.transform.position.y, this.transform.position.z + 1 * gameManager.levelSpeed * Time.deltaTime);
         else
             gameManager.counter -= Time.deltaTime;
+
+        // Goal
+        if (this.transform.position.z <= -205)
+        {
+            gameManager.lvlWon = 1;
+            gameManager.GameOver();
+        }
     }
 }

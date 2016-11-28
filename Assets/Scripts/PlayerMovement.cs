@@ -57,15 +57,10 @@ public class PlayerMovement : MonoBehaviour {
             {
                 transform.position = new Vector3D(transform.position.x + speedKeyboard * Time.deltaTime, transform.position.y, transform.position.z);
             }
-
-            //if (Input.GetKey(KeyCode.Space) && inAir == false)
-            //{
-            //    StartCoroutine(Hop(0.75f));
-            //}
         }
 
         // Check collision with "hostile" objects
-        gameManager.UpdateOtherObjects();
+        //gameManager.UpdateOtherObjects();
 
         if (shieldTimer <= 0f)
         {
@@ -89,15 +84,16 @@ public class PlayerMovement : MonoBehaviour {
                             }
                         }
                     }
-
                 }
             }
         }
         else
             shieldTimer -= Time.deltaTime;
 
+        // Killzone
         if (this.transform.position.y <= -3)
             gameManager.GameOver();
+
 
         // If collision with JumpTile
         if (goJump)

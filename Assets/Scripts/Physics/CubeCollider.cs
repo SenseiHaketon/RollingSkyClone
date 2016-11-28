@@ -30,11 +30,11 @@ public class CubeCollider : MonoBehaviour {
 	}
 
     // Draw Collision Box
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(myCollider.Center, myCollider.Outer * 2);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireCube(myCollider.Center, myCollider.Outer * 2);
+    //}
 
     // Check collision with Ground function
     public bool CheckGround()
@@ -42,6 +42,8 @@ public class CubeCollider : MonoBehaviour {
         bool temp = false;
         foreach(CubeCollider otherObject in gameManager.otherObjects)
         {
+            if (otherObject != null)
+            {
                 if (this.myCollider.AABBtoAABB(otherObject.myCollider) == true && otherObject.tag == "Ground")
                 {
                     temp = true;
@@ -50,7 +52,8 @@ public class CubeCollider : MonoBehaviour {
                 else
                 {
                     continue;
-                }
+                } 
+            }
         }
         return false;
     }
