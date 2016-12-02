@@ -1,0 +1,35 @@
+Mono path[0] = 'C:/Users/sinis/Documents/RollingSkyClone/RollingBallX_Data/Managed'
+Mono path[1] = 'C:/Users/sinis/Documents/RollingSkyClone/RollingBallX_Data/Mono'
+Mono config path = 'C:/Users/sinis/Documents/RollingSkyClone/RollingBallX_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/sinis/Documents/RollingSkyClone/RollingBallX_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55288
+Multi-casting "[IP] 10.10.73.148 [Port] 55288 [Flags] 2 [Guid] 1245803416 [EditorId] 3301552313 [Version] 1048832 [Id] WindowsPlayer(DESKTOP-F2SIJT6) [Debug] 0" to [225.0.0.222:54997]...
+PlayerConnection already initialized - listening to [10.10.73.148:55288]
+Initialize engine version: 5.4.2f2 (b7e030c65c9b)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GPU (ID=0x134b)
+    Vendor:   NVIDIA
+    VRAM:     996 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.115 seconds
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\sinis\Documents\RollingSkyClone\RollingBallX_Data\Managed\System.dll (this message is harmless)
+desktop: 3000x2000 60Hz; virtual: 3000x2000 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.900375 ms
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 235c -> priority: 1 

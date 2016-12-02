@@ -21,7 +21,7 @@ public class LevelMovement : MonoBehaviour {
             gameManager.counter -= Time.deltaTime;
 
         // Goal
-        if (this.transform.position.z <= -205)
+        if (this.transform.position.z <= -265)
         {
             gameManager.lvlWon = 1;
             gameManager.GameOver();

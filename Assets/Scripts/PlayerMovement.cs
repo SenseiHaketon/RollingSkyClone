@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour {
     public AudioClip clip;
     private bool sfxPlayed;
 
+    private Vector3D movement;
+
     // Use this for initialization
     void Start () {
         inAir = true;
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour {
         goJump = false;
         myPos = new Vector3D(transform.position.x, transform.position.y, transform.position.z);
         sfxPlayed = false;
+        movement = new Vector3D(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -45,6 +48,8 @@ public class PlayerMovement : MonoBehaviour {
             mockPos = new Vector3D(mockObject.transform.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3D.Lerp(myPos, mockPos, speed);
         }
+
+
 
         // Keyboard input
         if (gameManager.counter <= 0)
